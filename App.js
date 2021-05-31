@@ -4,6 +4,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { StyleSheet, View, Text } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
+import * as Screen from "./src/containers";
 
 export default function App() {
   const client = new ApolloClient({
@@ -11,13 +12,12 @@ export default function App() {
     cache: new InMemoryCache({}),
     uri: "localhost:4000/graphql", // change this in future
   });
+
   return (
     <SafeAreaProvider>
       <ApolloProvider client={client}>
         {/* <Provider> */}
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-        </View>
+        <Screen.Login />
         {/* </Provider> */}
       </ApolloProvider>
     </SafeAreaProvider>
