@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import client from "apolloClient";
+import { LOGIN } from "apolloMutations";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -35,7 +37,24 @@ const Login = () => {
             validateOnMount={true}
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={async ({ email, password }) => {
+              console.log("***email", email);
+              console.log("***password", password);
+              try {
+                const response = await client.mutate({
+                  mutation: LOGIN,
+                  variables: {
+                    data: {
+                      email,
+                      password,
+                    },
+                  },
+                });
+                console.log("***response", response);
+              } catch (error) {
+                console.log("***Error", error.networkError.result.errors);
+              }
+            }}
           >
             {({
               handleChange,
