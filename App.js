@@ -1,16 +1,25 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, View } from "react-native";
-import glamorous from "glamorous-native";
+import ApolloClient from "apollo-client";
 
-const Text = glamorous.text({});
+import { ApolloProvider } from "react-apollo";
+import { StyleSheet, View, Text } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
 
 export default function App() {
+  // const client = new ApolloClient({
+  //   connectToDevTools: true,
+  // });
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      {/* <ApolloProvider client={client}> */}
+      {/* <Provider> */}
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+      </View>
+      {/* </Provider> */}
+      {/* </ApolloProvider> */}
+    </SafeAreaProvider>
   );
 }
 
