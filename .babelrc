@@ -1,21 +1,17 @@
 {
-    "presets": [ "babel-preset-expo" ],
-    "plugins": [
-      [
-        "module-resolver",
-        {
-          "alias": {
-            "apolloClient": "./src/services/apollo/client",
-            "apolloQueries": "./src/services/apollo/queries",
-            "apolloMutations": "./src/services/apollo/mutations",
-            "components": "./src/components"
-            }
+  "presets": ["babel-preset-expo"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "apolloClient": "./src/services/apollo/client",
+          "apolloQueries": "./src/services/apollo/queries",
+          "apolloMutations": "./src/services/apollo/mutations",
+          "components": "./src/components",
+          "store": "./src/models/store"
         }
-      ]
+      }
     ]
+  ]
 }
-
-  
-  
-  
-  
