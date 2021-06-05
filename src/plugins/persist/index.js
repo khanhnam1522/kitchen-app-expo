@@ -1,5 +1,5 @@
 import createRematchPersist, { getPersistor as gP } from "@rematch/persist";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { PersistGate as PG } from "redux-persist/lib/integration/react";
 
 export default createRematchPersist({
