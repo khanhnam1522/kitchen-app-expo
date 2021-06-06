@@ -11,6 +11,8 @@
     "@apollo/client": "3.3.19",
     "@react-native-async-storage/async-storage": "1.15.5",
     "@react-native-community/netinfo": "5.9.6",
+    "@react-navigation/native": "5.9.4",
+    "@react-navigation/stack": "5.14.5",
     "@rematch/core": "2.0.1",
     "@rematch/loading": "2.0.1",
     "@rematch/persist": "2.0.1",
@@ -26,7 +28,11 @@
     "react-native-safe-area-context": "3.1.4",
     "react-native-web": "~0.13.12",
     "react-redux": "7.2.4",
-    "yup": "^0.32.9"
+    "yup": "0.32.9",
+    "react-native-gesture-handler": "~1.7.0",
+    "react-native-reanimated": "~1.13.0",
+    "react-native-screens": "~2.10.1",
+    "@react-native-community/masked-view": "0.1.10"
   },
   "devDependencies": {
     "@babel/core": "~7.9.0"

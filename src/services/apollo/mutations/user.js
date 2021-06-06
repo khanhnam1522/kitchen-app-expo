@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const LOGIN = gql`
   mutation login($data: UserProfileInput!) {
-    login(options: $data) {
+    login(data: $data) {
       errors {
         field
         message
