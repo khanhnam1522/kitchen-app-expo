@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,7 +25,9 @@ const loginValidationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = () => {
+const Login = ({ navigation }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -38,21 +40,23 @@ const Login = () => {
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
             onSubmit={async ({ email, password }) => {
-              console.log("***email", email);
-              console.log("***password", password);
-              try {
-                const response = await client.mutate({
-                  mutation: LOGIN,
-                  variables: {
-                    data: {
-                      email,
-                      password,
-                    },
+              const response = await client.mutate({
+                mutation: LOGIN,
+                variables: {
+                  data: {
+                    email,
+                    password,
                   },
-                });
-                console.log("***response", response);
-              } catch (error) {
-                console.log("***Error", error.networkError.result.errors);
+                },
+              });
+              console.log("***response", response);
+              if (response?.data?.login?.accessToken) {
+                //TODO : add ramda library
+                navigation.navigate("MainScreen");
+              } else {
+                const newErrorMessage =
+                  response?.data?.login?.errors[0].message || "";
+                setErrorMessage(newErrorMessage);
               }
             }}
           >
@@ -97,6 +101,7 @@ const Login = () => {
                   title="LOGIN"
                   disabled={!isValid || values.email === ""}
                 />
+                <Text style={styles.errorText}>{errorMessage}</Text>
               </>
             )}
           </Formik>
