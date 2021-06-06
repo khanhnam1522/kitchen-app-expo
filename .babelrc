@@ -9,7 +9,8 @@
           "apolloQueries": "./src/services/apollo/queries",
           "apolloMutations": "./src/services/apollo/mutations",
           "components": "./src/components",
-          "store": "./src/models/store"
+          "store": "./src/models/store",
+          "navigation": "./src/services/navigation"
         }
       }
     ]

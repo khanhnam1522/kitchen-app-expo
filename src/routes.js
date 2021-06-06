@@ -3,6 +3,7 @@ import { Animated, Easing } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import * as Screen from "./containers";
+import { navigationRef } from "navigation";
 
 const fadeInTransition = () => ({
   transitionSpec: {
@@ -27,7 +28,7 @@ const Stack = createStackNavigator();
 
 const Routes = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName="Login"
         headerMode="none"
