@@ -44,5 +44,9 @@ export default {
         this.setErrorMessage(errorMessage);
       }
     },
+    logout() {
+      this.setToken(null);
+      navigation.navigate("Login");
+    },
   }),
 };
