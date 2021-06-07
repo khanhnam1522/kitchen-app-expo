@@ -36,7 +36,7 @@ export default {
       console.log("Login: ", accessToken);
       if (accessToken) {
         this.setToken(accessToken);
-        navigation.navigate("MainScreen");
+        navigation.reset("MainScreen");
       } else {
         const errorMessage = R.path(["data", "login", "errors", "message"])(
           response
@@ -46,7 +46,7 @@ export default {
     },
     logout() {
       this.setToken(null);
-      navigation.navigate("Login");
+      navigation.reset("Login");
     },
   }),
 };
