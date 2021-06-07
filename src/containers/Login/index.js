@@ -11,8 +11,7 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
-import client from "apolloClient";
-import { LOGIN } from "apolloMutations";
+import { connect } from "react-redux";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -25,9 +24,7 @@ const loginValidationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = ({ navigation }) => {
-  const [errorMessage, setErrorMessage] = useState("");
-
+const Login = ({ navigation, login, auth }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -40,24 +37,7 @@ const Login = ({ navigation }) => {
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
             onSubmit={async ({ email, password }) => {
-              const response = await client.mutate({
-                mutation: LOGIN,
-                variables: {
-                  data: {
-                    email,
-                    password,
-                  },
-                },
-              });
-              console.log("***response", response);
-              if (response?.data?.login?.accessToken) {
-                //TODO : add ramda library
-                navigation.navigate("MainScreen");
-              } else {
-                const newErrorMessage =
-                  response?.data?.login?.errors[0].message || "";
-                setErrorMessage(newErrorMessage);
-              }
+              await login({ email, password });
             }}
           >
             {({
@@ -101,7 +81,7 @@ const Login = ({ navigation }) => {
                   title="LOGIN"
                   disabled={!isValid || values.email === ""}
                 />
-                <Text style={styles.errorText}>{errorMessage}</Text>
+                <Text style={styles.errorText}>{auth.errorMessage}</Text>
               </>
             )}
           </Formik>
@@ -140,4 +120,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapState = ({ auth }) => ({ auth });
+
+const mapDispatch = ({ auth }) => ({
+  login: (values) => auth.login(values),
+});
+
+export default connect(mapState, mapDispatch)(Login);
