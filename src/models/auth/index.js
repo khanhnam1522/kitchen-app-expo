@@ -1,6 +1,6 @@
 import R from "ramda";
 import { setItem, deleteItem } from "secureStore";
-import { LOGIN } from "apolloMutations";
+import { LOGIN, REGISTER } from "apolloMutations";
 import client from "apolloClient";
 import * as navigation from "navigation";
 
@@ -50,6 +50,29 @@ export default {
       this.setToken(null);
       await deleteItem("accessToken");
       navigation.reset("Login");
+    },
+    async register({ email, password }) {
+      const response = await client.mutate({
+        mutation: REGISTER,
+        variables: {
+          data: {
+            email,
+            password,
+          },
+        },
+      });
+      const accessToken = R.path(["data", "register", "accessToken"])(response);
+      console.log("Login: ", accessToken);
+      if (accessToken) {
+        this.setToken(accessToken);
+        await setItem("accessToken", accessToken);
+        navigation.reset("MainScreen");
+      } else {
+        const errorMessage = R.path(["data", "register", "errors", "message"])(
+          response
+        );
+        this.setErrorMessage(errorMessage);
+      }
     },
   }),
 };

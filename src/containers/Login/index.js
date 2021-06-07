@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,20 +24,21 @@ const loginValidationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = ({ login, auth }) => {
+const Login = ({ login, auth, register }) => {
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <View style={styles.loginContainer}>
-          <Text>Login Screen</Text>
+          <Text>{isLogin ? "Login Screen" : "Register Screen"}</Text>
 
           <Formik
             validateOnMount={true}
             validationSchema={loginValidationSchema}
             initialValues={{ email: "", password: "" }}
-            onSubmit={async ({ email, password }) => {
-              await login({ email, password });
+            onSubmit={async (data) => {
+              isLogin ? await login(data) : await register(data);
             }}
           >
             {({
@@ -78,13 +79,17 @@ const Login = ({ login, auth }) => {
 
                 <Button
                   onPress={handleSubmit}
-                  title="LOGIN"
+                  title={isLogin ? "LOGIN" : "REGISTER"}
                   disabled={!isValid || values.email === ""}
                 />
                 <Text style={styles.errorText}>{auth.errorMessage}</Text>
               </>
             )}
           </Formik>
+          <Button
+            onPress={() => setIsLogin(!isLogin)}
+            title={isLogin ? "REGISTER" : "LOGIN"}
+          />
         </View>
       </SafeAreaView>
     </>
@@ -124,6 +129,7 @@ const mapState = ({ auth }) => ({ auth });
 
 const mapDispatch = ({ auth }) => ({
   login: (values) => auth.login(values),
+  register: (values) => auth.register(values),
 });
 
 export default connect(mapState, mapDispatch)(Login);

@@ -15,3 +15,19 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const REGISTER = gql`
+  mutation register($data: UserProfileInput!) {
+    register(data: $data) {
+      errors {
+        field
+        message
+      }
+      user {
+        id
+        email
+      }
+      accessToken
+    }
+  }
+`;
