@@ -1,3 +1,4 @@
 // Pages
 export { default as Login } from "./Login";
 export { default as MainScreen } from "./MainScreen";
+export { default as Landing } from "./Landing";

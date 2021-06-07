@@ -30,7 +30,7 @@ const Routes = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Landing"
         headerMode="none"
         mode="modal"
         screenOptions={{
@@ -38,6 +38,7 @@ const Routes = () => {
           transitionConfig: fadeInTransition,
         }}
       >
+        <Stack.Screen name="Landing" component={Screen.Landing} />
         <Stack.Screen name="Login" component={Screen.Login} />
         <Stack.Screen name="MainScreen" component={Screen.MainScreen} />
       </Stack.Navigator>
