@@ -1,4 +1,5 @@
 import R from "ramda";
+import { setItem, deleteItem } from "secureStore";
 import { LOGIN } from "apolloMutations";
 import client from "apolloClient";
 import * as navigation from "navigation";
@@ -36,6 +37,7 @@ export default {
       console.log("Login: ", accessToken);
       if (accessToken) {
         this.setToken(accessToken);
+        await setItem("accessToken", accessToken);
         navigation.reset("MainScreen");
       } else {
         const errorMessage = R.path(["data", "login", "errors", "message"])(
@@ -44,8 +46,9 @@ export default {
         this.setErrorMessage(errorMessage);
       }
     },
-    logout() {
+    async logout() {
       this.setToken(null);
+      await deleteItem("accessToken");
       navigation.reset("Login");
     },
   }),

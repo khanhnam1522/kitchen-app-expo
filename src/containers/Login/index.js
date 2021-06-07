@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,7 +24,7 @@ const loginValidationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = ({ navigation, login, auth }) => {
+const Login = ({ login, auth }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />

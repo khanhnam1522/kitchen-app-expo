@@ -10,7 +10,8 @@
           "apolloMutations": "./src/services/apollo/mutations",
           "components": "./src/components",
           "store": "./src/models/store",
-          "navigation": "./src/services/navigation"
+          "navigation": "./src/services/navigation",
+          "secureStore": "./src/services/secureStore"
         }
       }
     ]
