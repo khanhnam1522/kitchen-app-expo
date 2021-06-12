@@ -5,8 +5,8 @@ import colors from "colors";
 
 const { width } = Dimensions.get("window");
 
-const PrimaryButton = ({ title }) => (
-  <TouchableOpacity style={styles.container}>
+const PrimaryButton = ({ title, ...otherProps }) => (
+  <TouchableOpacity style={styles.container} {...otherProps}>
     <Text style={styles.text}>{title}</Text>
   </TouchableOpacity>
 );

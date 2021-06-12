@@ -10,11 +10,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Text, FormikForm } from "components";
-import { Formik } from "formik";
 import * as yup from "yup";
 import colors from "colors";
 import { connect } from "react-redux";
-import { TextInputForm, PrimaryButton, SecondaryButton } from "components";
+import { TextInputForm, SecondaryButton, SubmitFormButton } from "components";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -28,7 +27,8 @@ const loginValidationSchema = yup.object().shape({
 });
 
 const Login = ({ login, auth, register }) => {
-  const [isLogin, setIsLogin] = useState(true);
+  // const { setFieldTouched, setFieldValue, errors, touched, values } =
+  // useFormikContext();
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -37,7 +37,7 @@ const Login = ({ login, auth, register }) => {
           validationSchema={loginValidationSchema}
           initialValues={{ email: "", password: "" }}
           onSubmit={async (data) => {
-            isLogin ? await login(data) : await register(data);
+            await login(data);
           }}
         >
           <TextInputForm
@@ -55,7 +55,7 @@ const Login = ({ login, auth, register }) => {
                 title={isLogin ? "LOGIN" : "REGISTER"}
                 disabled={!isValid || values.email === ""}
               /> */}
-          <PrimaryButton title="Login" />
+          <SubmitFormButton title="Login" />
           <SecondaryButton title="Create A New Account" />
           <Text style={styles.errorText}>{auth.errorMessage}</Text>
         </FormikForm>
