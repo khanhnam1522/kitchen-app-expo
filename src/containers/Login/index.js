@@ -12,6 +12,7 @@ import {
 import { Text } from "components";
 import { Formik } from "formik";
 import * as yup from "yup";
+import colors from "colors";
 import { connect } from "react-redux";
 import { TextInputForm, PrimaryButton, SecondaryButton } from "components";
 
@@ -74,7 +75,9 @@ const Login = ({ login, auth, register }) => {
               />
 
               <TouchableOpacity style={{ margin: 10 }}>
-                <Text style={{ color: "#70B56E" }}>Forgot your password?</Text>
+                <Text style={{ color: colors.primary }}>
+                  Forgot your password?
+                </Text>
               </TouchableOpacity>
               {/* <Button
                 onPress={handleSubmit}

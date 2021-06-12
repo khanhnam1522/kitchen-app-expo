@@ -2,17 +2,18 @@ import React from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Text } from "components";
+import colors from "colors";
 
 function TextInputForm({ title, ...otherProps }) {
   return (
     <View style={{ width: "100%", margin: 10 }}>
       <View style={{ marginBottom: 5 }}>
-        <Text style={{ color: "#70B56E" }}>{title}</Text>
+        <Text style={{ color: colors.primary }}>{title}</Text>
       </View>
       <View style={styles.container}>
         <TextInput
           style={{
-            color: "#70B56E",
+            color: colors.primary,
             fontSize: 18,
             fontFamily: "Roboto",
           }}
@@ -22,7 +23,7 @@ function TextInputForm({ title, ...otherProps }) {
           <Ionicons
             name="md-checkmark-circle"
             size={24}
-            color="#70B56E"
+            color={colors.primary}
             style={styles.icon}
           />
         </View>
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 10,
     borderRadius: 17,
-    borderColor: "#70B56E",
+    borderColor: colors.primary,
     borderWidth: 2,
     justifyContent: "space-between",
   },

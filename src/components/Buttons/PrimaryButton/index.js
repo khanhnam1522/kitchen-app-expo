@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Text } from "components";
+import colors from "colors";
 
 const { width } = Dimensions.get("window");
 
@@ -15,7 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
     alignItems: "center",
-    backgroundColor: "#70B56E",
+    backgroundColor: colors.primary,
     borderRadius: 17,
     height: 50,
     width: width * 0.9,
