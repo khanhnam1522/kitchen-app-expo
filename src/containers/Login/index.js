@@ -9,7 +9,7 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { Text } from "components";
+import { Text, FormikForm } from "components";
 import { Formik } from "formik";
 import * as yup from "yup";
 import colors from "colors";
@@ -33,63 +33,32 @@ const Login = ({ login, auth, register }) => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <Formik
-          validateOnMount={true}
+        <FormikForm
           validationSchema={loginValidationSchema}
           initialValues={{ email: "", password: "" }}
           onSubmit={async (data) => {
             isLogin ? await login(data) : await register(data);
           }}
         >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-            isValid,
-          }) => (
-            <>
-              {/* {errors.email && touched.email && (
-                  <Text style={styles.errorText}>{errors.email}</Text>
-                )} */}
-              {/* {errors.password && touched.password && (
-                  <Text style={styles.errorText}>{errors.password}</Text>
-                )} */}
-              <TextInputForm
-                title="Email"
-                name="email"
-                onChangeText={handleChange("email")}
-                onBlur={handleBlur("email")}
-                value={values.email}
-                keyboardType="email-address"
-              />
-              <TextInputForm
-                title="Password"
-                name="password"
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
-                secureTextEntry
-              />
+          <TextInputForm
+            title="Email"
+            name="email"
+            keyboardType="email-address"
+          />
+          <TextInputForm title="Password" name="password" secureTextEntry />
 
-              <TouchableOpacity style={{ margin: 10 }}>
-                <Text style={{ color: colors.primary }}>
-                  Forgot your password?
-                </Text>
-              </TouchableOpacity>
-              {/* <Button
+          <TouchableOpacity style={{ margin: 10 }}>
+            <Text style={{ color: colors.primary }}>Forgot your password?</Text>
+          </TouchableOpacity>
+          {/* <Button
                 onPress={handleSubmit}
                 title={isLogin ? "LOGIN" : "REGISTER"}
                 disabled={!isValid || values.email === ""}
               /> */}
-              <PrimaryButton title="Login" />
-              <SecondaryButton title="Create A New Account" />
-              <Text style={styles.errorText}>{auth.errorMessage}</Text>
-            </>
-          )}
-        </Formik>
+          <PrimaryButton title="Login" />
+          <SecondaryButton title="Create A New Account" />
+          <Text style={styles.errorText}>{auth.errorMessage}</Text>
+        </FormikForm>
         {/* <Button
           onPress={() => setIsLogin(!isLogin)}
           title={isLogin ? "REGISTER" : "LOGIN"}
@@ -101,7 +70,6 @@ const Login = ({ login, auth, register }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: "90%",
     justifyContent: "center",
     alignItems: "center",

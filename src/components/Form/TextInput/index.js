@@ -1,10 +1,15 @@
 import React from "react";
-import { View, TextInput, StyleSheet } from "react-native";
+import { View, TextInput, StyleSheet, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useFormikContext } from "formik";
 import { Text } from "components";
 import colors from "colors";
 
-function TextInputForm({ title, ...otherProps }) {
+const { width } = Dimensions.get("window");
+
+function TextInputForm({ title, name, ...otherProps }) {
+  const { setFieldTouched, setFieldValue, errors, touched, values } =
+    useFormikContext();
   return (
     <View style={{ width: "100%", margin: 10 }}>
       <View style={{ marginBottom: 5 }}>
@@ -12,11 +17,10 @@ function TextInputForm({ title, ...otherProps }) {
       </View>
       <View style={styles.container}>
         <TextInput
-          style={{
-            color: colors.primary,
-            fontSize: 18,
-            fontFamily: "Roboto",
-          }}
+          style={styles.textInput}
+          onBlur={() => setFieldTouched(name)}
+          onChangeText={(text) => setFieldValue(name, text)}
+          value={values[name]}
           {...otherProps}
         />
         <View style={{ alignSelf: "center" }}>
@@ -34,7 +38,6 @@ function TextInputForm({ title, ...otherProps }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     flexDirection: "row",
     padding: 10,
     borderRadius: 17,
@@ -44,6 +47,12 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 10,
+  },
+  textInput: {
+    color: colors.primary,
+    fontSize: 18,
+    fontFamily: "Roboto",
+    width: width * 0.75,
   },
 });
 
