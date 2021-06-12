@@ -1,6 +1,7 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Text } from "react-native";
+import { View, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Text } from "components";
 
 function TextInputForm({ title, ...otherProps }) {
   return (

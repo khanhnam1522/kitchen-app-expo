@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
+import { View, Button } from "react-native";
 import { connect } from "react-redux";
+import { Text } from "components";
 
 const MainScreen = ({ logout }) => {
   return (

@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { Text } from "components";
 
-const { height, width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 const PrimaryButton = ({ title }) => (
   <TouchableOpacity style={styles.container}>
@@ -27,7 +21,7 @@ const styles = StyleSheet.create({
     width: width * 0.9,
     margin: 10,
   },
-  text: { fontSize: 18, fontFamily: "Roboto", color: "white" },
+  text: { fontSize: 18, color: "white" },
 });
 
 export default PrimaryButton;

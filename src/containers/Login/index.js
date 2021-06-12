@@ -4,12 +4,12 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   StatusBar,
   TextInput,
   Button,
   TouchableOpacity,
 } from "react-native";
+import { Text } from "components";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
