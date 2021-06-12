@@ -8,10 +8,12 @@ import {
   StatusBar,
   TextInput,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
+import { TextInputForm, PrimaryButton, SecondaryButton } from "components";
 
 const loginValidationSchema = yup.object().shape({
   email: yup
@@ -30,67 +32,65 @@ const Login = ({ login, auth, register }) => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <View style={styles.loginContainer}>
-          <Text>{isLogin ? "Login Screen" : "Register Screen"}</Text>
-
-          <Formik
-            validateOnMount={true}
-            validationSchema={loginValidationSchema}
-            initialValues={{ email: "", password: "" }}
-            onSubmit={async (data) => {
-              isLogin ? await login(data) : await register(data);
-            }}
-          >
-            {({
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              values,
-              errors,
-              touched,
-              isValid,
-            }) => (
-              <>
-                <TextInput
-                  name="email"
-                  placeholder="Email Address"
-                  style={styles.textInput}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  keyboardType="email-address"
-                />
-                {errors.email && touched.email && (
+        <Formik
+          validateOnMount={true}
+          validationSchema={loginValidationSchema}
+          initialValues={{ email: "", password: "" }}
+          onSubmit={async (data) => {
+            isLogin ? await login(data) : await register(data);
+          }}
+        >
+          {({
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            values,
+            errors,
+            touched,
+            isValid,
+          }) => (
+            <>
+              {/* {errors.email && touched.email && (
                   <Text style={styles.errorText}>{errors.email}</Text>
-                )}
-
-                <TextInput
-                  name="password"
-                  placeholder="Password"
-                  style={styles.textInput}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  value={values.password}
-                  secureTextEntry
-                />
-                {errors.password && touched.password && (
+                )} */}
+              {/* {errors.password && touched.password && (
                   <Text style={styles.errorText}>{errors.password}</Text>
-                )}
+                )} */}
+              <TextInputForm
+                title="Email"
+                name="email"
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
+                value={values.email}
+                keyboardType="email-address"
+              />
+              <TextInputForm
+                title="Password"
+                name="password"
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
+                value={values.password}
+                secureTextEntry
+              />
 
-                <Button
-                  onPress={handleSubmit}
-                  title={isLogin ? "LOGIN" : "REGISTER"}
-                  disabled={!isValid || values.email === ""}
-                />
-                <Text style={styles.errorText}>{auth.errorMessage}</Text>
-              </>
-            )}
-          </Formik>
-          <Button
-            onPress={() => setIsLogin(!isLogin)}
-            title={isLogin ? "REGISTER" : "LOGIN"}
-          />
-        </View>
+              <TouchableOpacity style={{ margin: 10 }}>
+                <Text style={{ color: "#70B56E" }}>Forgot your password?</Text>
+              </TouchableOpacity>
+              {/* <Button
+                onPress={handleSubmit}
+                title={isLogin ? "LOGIN" : "REGISTER"}
+                disabled={!isValid || values.email === ""}
+              /> */}
+              <PrimaryButton title="Login" />
+              <SecondaryButton title="Create A New Account" />
+              <Text style={styles.errorText}>{auth.errorMessage}</Text>
+            </>
+          )}
+        </Formik>
+        {/* <Button
+          onPress={() => setIsLogin(!isLogin)}
+          title={isLogin ? "REGISTER" : "LOGIN"}
+        /> */}
       </SafeAreaView>
     </>
   );
@@ -99,29 +99,10 @@ const Login = ({ login, auth, register }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: "90%",
     justifyContent: "center",
     alignItems: "center",
-  },
-  loginContainer: {
-    width: "80%",
-    alignItems: "center",
-    backgroundColor: "white",
-    padding: 10,
-    elevation: 10,
-    backgroundColor: "#e6e6e6",
-  },
-  textInput: {
-    height: 40,
-    width: "100%",
-    margin: 10,
-    backgroundColor: "white",
-    borderColor: "gray",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 10,
-  },
-  errorText: {
-    fontSize: 10,
-    color: "red",
+    alignSelf: "center",
   },
 });
 
