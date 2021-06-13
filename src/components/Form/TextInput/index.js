@@ -10,12 +10,18 @@ const { width } = Dimensions.get("window");
 function TextInputForm({ title, name, ...otherProps }) {
   const { setFieldTouched, setFieldValue, errors, touched, values } =
     useFormikContext();
+  const invalidInput = errors[name] && touched[name];
   return (
     <View style={{ width: "100%", margin: 10 }}>
       <View style={{ marginBottom: 5 }}>
         <Text style={{ color: colors.primary }}>{title}</Text>
       </View>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          { borderColor: invalidInput ? colors.error : colors.primary },
+        ]}
+      >
         <TextInput
           style={styles.textInput}
           onBlur={() => setFieldTouched(name)}
@@ -32,6 +38,9 @@ function TextInputForm({ title, name, ...otherProps }) {
           />
         </View>
       </View>
+      {errors[name] && touched[name] && (
+        <Text style={styles.errorText}>{errors[name]}</Text>
+      )}
     </View>
   );
 }
@@ -53,6 +62,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Roboto",
     width: width * 0.75,
+  },
+  errorText: {
+    color: colors.error,
   },
 });
 

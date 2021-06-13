@@ -5,3 +5,4 @@ export { default as SubmitFormButton } from "./Form/SubmitFormButton";
 export { default as PrimaryButton } from "./Buttons/PrimaryButton";
 export { default as SecondaryButton } from "./Buttons/SecondaryButton";
 export { default as Text } from "./Text";
+export { default as Separator } from "./Separator";
