@@ -4,5 +4,6 @@ export { default as FormikForm } from "./Form/FormikForm";
 export { default as SubmitFormButton } from "./Form/SubmitFormButton";
 export { default as PrimaryButton } from "./Buttons/PrimaryButton";
 export { default as SecondaryButton } from "./Buttons/SecondaryButton";
+export { default as BackButton } from "./Buttons/BackButton";
 export { default as Text } from "./Text";
 export { default as Separator } from "./Separator";

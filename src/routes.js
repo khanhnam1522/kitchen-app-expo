@@ -40,6 +40,7 @@ const Routes = () => {
       >
         <Stack.Screen name="Landing" component={Screen.Landing} />
         <Stack.Screen name="Login" component={Screen.Login} />
+        <Stack.Screen name="Register" component={Screen.Register} />
         <Stack.Screen name="MainScreen" component={Screen.MainScreen} />
       </Stack.Navigator>
     </NavigationContainer>

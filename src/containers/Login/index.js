@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
   StatusBar,
-  TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { Text, FormikForm, Separator } from "components";
@@ -27,7 +25,7 @@ const loginValidationSchema = yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = ({ login, auth, register }) => {
+const Login = ({ login, auth, navigation }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -69,7 +67,10 @@ const Login = ({ login, auth, register }) => {
 
               <View style={{ marginBottom: 30 }}>
                 <Separator title="OR" />
-                <SecondaryButton title="Create A New Account" />
+                <SecondaryButton
+                  title="Create A New Account"
+                  onPress={() => navigation.navigate("Register")}
+                />
               </View>
             </View>
           </ScrollView>

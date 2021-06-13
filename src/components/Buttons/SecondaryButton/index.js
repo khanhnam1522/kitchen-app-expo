@@ -5,8 +5,8 @@ import colors from "colors";
 
 const { width } = Dimensions.get("window");
 
-const SecondaryButton = ({ title }) => (
-  <TouchableOpacity style={styles.container}>
+const SecondaryButton = ({ title, onPress }) => (
+  <TouchableOpacity style={styles.container} onPress={onPress}>
     <Text style={styles.text}>{title}</Text>
   </TouchableOpacity>
 );
