@@ -30,7 +30,7 @@ const Register = ({ auth, register, navigation }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFDCB" }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#FFFFE1" }}>
         <ScrollView style={{ flex: 1 }}>
           <View style={styles.iconContainer}>
             <BackButton onPress={() => navigation.pop()} />
