@@ -2,12 +2,12 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "components";
 import colors from "colors";
-import { Ionicons } from "@expo/vector-icons";
+import Icon from "icons";
 
 const BackButton = ({ onPress }) => (
   <View style={styles.container}>
     <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-      <Ionicons name="md-arrow-back" size={20} color="white" />
+      <Icon type="back-arrow" color="white" size={20} />
     </TouchableOpacity>
     <Text style={styles.text}> Back </Text>
   </View>

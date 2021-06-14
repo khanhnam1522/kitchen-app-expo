@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFormikContext } from "formik";
 import { Text } from "components";
 import colors from "colors";
+import Icon from "icons";
 
 const { width } = Dimensions.get("window");
 
@@ -30,12 +31,7 @@ function TextInputForm({ title, name, ...otherProps }) {
           {...otherProps}
         />
         <View style={{ alignSelf: "center" }}>
-          <Ionicons
-            name="md-checkmark-circle"
-            size={24}
-            color={colors.primary}
-            style={styles.icon}
-          />
+          <Icon type="checkmark" color={colors.primary} size={24} />
         </View>
       </View>
       {errors[name] && touched[name] && (
