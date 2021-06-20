@@ -1,1 +1,1 @@
-export { LOGIN, REGISTER } from "./user";
+export { LOGIN, REGISTER, SEND_VERIFICATION_CODE } from "./user";

@@ -31,3 +31,9 @@ export const REGISTER = gql`
     }
   }
 `;
+
+export const SEND_VERIFICATION_CODE = gql`
+  mutation sendVerificationCode($data: SendEmailVerificationInput!) {
+    sendVerificationCode(data: $data)
+  }
+`;

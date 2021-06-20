@@ -7,6 +7,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Text, FormikForm } from "components";
+import { connect } from "react-redux";
 import * as yup from "yup";
 import colors from "colors";
 import { TextInputForm, BackButton, SubmitFormButton } from "components";
@@ -18,7 +19,7 @@ const emailSubmissionSchema = yup.object().shape({
     .required("Email Address is Required"),
 });
 
-const EmailSubmission = ({ auth, register, navigation }) => {
+const EmailSubmission = ({ sendVerificationCode, auth, navigation }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -32,8 +33,8 @@ const EmailSubmission = ({ auth, register, navigation }) => {
               <FormikForm
                 validationSchema={emailSubmissionSchema}
                 initialValues={{ email: "" }}
-                onSubmit={(data) => {
-                  console.log("***data", data);
+                onSubmit={async (data) => {
+                  await sendVerificationCode(data);
                 }}
               >
                 <TextInputForm
@@ -41,6 +42,7 @@ const EmailSubmission = ({ auth, register, navigation }) => {
                   name="email"
                   keyboardType="email-address"
                 />
+                <Text style={styles.errorText}>{auth.errorMessage}</Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Submit Email" />
                 </View>
@@ -68,6 +70,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginVertical: 30,
   },
+  errorText: {
+    color: colors.error,
+  },
 });
 
-export default EmailSubmission;
+const mapState = ({ auth }) => ({ auth });
+
+const mapDispatch = ({ auth }) => ({
+  sendVerificationCode: (values) => auth.sendVerificationCode(values),
+});
+
+export default connect(mapState, mapDispatch)(EmailSubmission);

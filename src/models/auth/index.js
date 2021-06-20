@@ -1,6 +1,6 @@
 import R from "ramda";
 import { setItem, deleteItem } from "secureStore";
-import { LOGIN, REGISTER } from "apolloMutations";
+import { LOGIN, REGISTER, SEND_VERIFICATION_CODE } from "apolloMutations";
 import client from "apolloClient";
 import * as navigation from "navigation";
 
@@ -73,6 +73,25 @@ export default {
           response
         );
         this.setErrorMessage(errorMessage);
+      }
+    },
+    async sendVerificationCode({ email }) {
+      const response = await client.mutate({
+        mutation: SEND_VERIFICATION_CODE,
+        variables: {
+          data: {
+            email,
+          },
+        },
+      });
+      const sendEmailSuccess = R.path(["data", "sendVerificationCode"])(
+        response
+      );
+      if (sendEmailSuccess) {
+        console.log("Email sent to ", email);
+        navigation.navigate("Verification");
+      } else {
+        this.setErrorMessage("Something went wrong. Please try again later");
       }
     },
   }),
