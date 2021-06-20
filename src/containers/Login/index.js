@@ -55,7 +55,10 @@ const Login = ({ login, auth, navigation }) => {
                     name="password"
                     secureTextEntry
                   />
-                  <TouchableOpacity style={{ margin: 10, alignSelf: "center" }}>
+                  <TouchableOpacity
+                    style={{ margin: 10, alignSelf: "center" }}
+                    onPress={() => navigation.navigate("EmailSubmission")}
+                  >
                     <Text style={{ color: colors.primary }}>
                       Forgot your password?
                     </Text>
