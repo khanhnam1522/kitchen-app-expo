@@ -63,7 +63,9 @@ const Login = ({ login, auth, navigation }) => {
                       Forgot your password?
                     </Text>
                   </TouchableOpacity>
-                  <Text style={styles.errorText}>{auth.errorMessage}</Text>
+                  <Text style={styles.errorText}>
+                    {auth.errorMessage.login}
+                  </Text>
                   <SubmitFormButton title="Login" />
                 </FormikForm>
               </View>

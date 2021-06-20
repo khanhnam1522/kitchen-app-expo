@@ -1,12 +1,23 @@
 import R from "ramda";
 import { setItem, deleteItem } from "secureStore";
-import { LOGIN, REGISTER, SEND_VERIFICATION_CODE } from "apolloMutations";
+import {
+  LOGIN,
+  REGISTER,
+  SEND_VERIFICATION_CODE,
+  VERIFY_CODE,
+} from "apolloMutations";
 import client from "apolloClient";
 import * as navigation from "navigation";
 
 const defaultState = {
   accessToken: null,
-  errorMessage: "",
+  errorMessage: {
+    login: "",
+    register: "",
+    submitEmail: "",
+    verifyCode: "",
+    changePassword: "",
+  },
 };
 
 export default {
@@ -43,7 +54,7 @@ export default {
         const errorMessage = R.path(["data", "login", "errors", "message"])(
           response
         );
-        this.setErrorMessage(errorMessage);
+        this.setErrorMessage({ login: errorMessage });
       }
     },
     async logout() {
@@ -72,7 +83,7 @@ export default {
         const errorMessage = R.path(["data", "register", "errors", "message"])(
           response
         );
-        this.setErrorMessage(errorMessage);
+        this.setErrorMessage({ register: errorMessage });
       }
     },
     async sendVerificationCode({ email }) {
@@ -89,9 +100,40 @@ export default {
       );
       if (sendEmailSuccess) {
         console.log("Email sent to ", email);
-        navigation.navigate("Verification");
+        navigation.navigate("Verification", { email: email });
       } else {
-        this.setErrorMessage("Something went wrong. Please try again later");
+        this.setErrorMessage({
+          submitEmail: "Something went wrong. Please try again later",
+        });
+      }
+    },
+    async verifyCode({ verificationCode, email }) {
+      if (Number.isNaN(verificationCode)) {
+        this.setErrorMessage({ verifyCode: "Invalid verification code" });
+        return;
+      }
+      const response = await client.mutate({
+        mutation: VERIFY_CODE,
+        variables: {
+          data: {
+            verificationCode,
+            email,
+          },
+        },
+      });
+      const verifySuccess = R.path(["data", "verifyCode", "validateSucess"])(
+        response
+      );
+      if (verifySuccess) {
+        console.log("Verify code successfully");
+      } else {
+        const errorMessage = R.path([
+          "data",
+          "verifyCode",
+          "errors",
+          "message",
+        ])(response);
+        this.setErrorMessage({ verifyCode: errorMessage });
       }
     },
   }),

@@ -60,7 +60,9 @@ const Register = ({ auth, register, navigation }) => {
                   name="reEnterPassword"
                   secureTextEntry
                 />
-                <Text style={styles.errorText}>{auth.errorMessage}</Text>
+                <Text style={styles.errorText}>
+                  {auth.errorMessage.register}
+                </Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Register" />
                 </View>

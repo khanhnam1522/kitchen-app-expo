@@ -20,7 +20,14 @@ import { TextInputForm, BackButton, SubmitFormButton } from "components";
 //     .required("Email Address is Required"),
 // });
 
-const Verification = ({ sendVerificationCode, auth, navigation }) => {
+const Verification = ({
+  sendVerificationCode,
+  verifyCode,
+  auth,
+  navigation,
+  route,
+}) => {
+  const { email } = route.params;
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -34,8 +41,11 @@ const Verification = ({ sendVerificationCode, auth, navigation }) => {
               <FormikForm
                 // validationSchema={verificationCodeSchema}
                 initialValues={{ verificationCode: "" }}
-                onSubmit={(data) => {
-                  console.log("***data", data);
+                onSubmit={async (data) => {
+                  await verifyCode({
+                    verificationCode: parseInt(data.verificationCode),
+                    email: email,
+                  });
                 }}
               >
                 <TextInputForm
@@ -45,11 +55,21 @@ const Verification = ({ sendVerificationCode, auth, navigation }) => {
                 />
                 <TouchableOpacity
                   style={{ margin: 10, alignSelf: "center" }}
-                  onPress={() => navigation.navigate("EmailSubmission")}
+                  onPress={async () => {
+                    if (email) {
+                      await sendVerificationCode({ email: email });
+                    } else {
+                      console.log(
+                        "Error getting email to resend verification code"
+                      );
+                    }
+                  }}
                 >
                   <Text style={{ color: colors.primary }}>Resend code</Text>
                 </TouchableOpacity>
-                <Text style={styles.errorText}>{auth.errorMessage}</Text>
+                <Text style={styles.errorText}>
+                  {auth.errorMessage.verifyCode}
+                </Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Submit Verification Code" />
                 </View>
@@ -86,6 +106,7 @@ const mapState = ({ auth }) => ({ auth });
 
 const mapDispatch = ({ auth }) => ({
   sendVerificationCode: (values) => auth.sendVerificationCode(values),
+  verifyCode: (values) => auth.verifyCode(values),
 });
 
 export default connect(mapState, mapDispatch)(Verification);

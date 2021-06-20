@@ -37,3 +37,15 @@ export const SEND_VERIFICATION_CODE = gql`
     sendVerificationCode(data: $data)
   }
 `;
+
+export const VERIFY_CODE = gql`
+  mutation verifyCode($data: VerifyCodeInput!) {
+    verifyCode(data: $data) {
+      errors {
+        field
+        message
+      }
+      validateSucess
+    }
+  }
+`;
