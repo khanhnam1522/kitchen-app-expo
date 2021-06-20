@@ -5,6 +5,7 @@ import {
   REGISTER,
   SEND_VERIFICATION_CODE,
   VERIFY_CODE,
+  CHANGE_PASSWORD,
 } from "apolloMutations";
 import client from "apolloClient";
 import * as navigation from "navigation";
@@ -58,7 +59,7 @@ export default {
           this.setErrorMessage({ login: errorMessage });
         } else {
           this.setErrorMessage({
-            verifyCode: "Something went wrong. Please try again later",
+            login: "Something went wrong. Please try again later",
           });
         }
       }
@@ -84,6 +85,7 @@ export default {
       if (accessToken) {
         this.setToken(accessToken);
         await setItem("accessToken", accessToken);
+        this.setErrorMessage({ register: "" });
         navigation.reset("MainScreen");
       } else {
         const errorMessage = R.path(["data", "register", "errors", "message"])(
@@ -93,7 +95,7 @@ export default {
           this.setErrorMessage({ register: errorMessage });
         } else {
           this.setErrorMessage({
-            verifyCode: "Something went wrong. Please try again later",
+            register: "Something went wrong. Please try again later",
           });
         }
       }
@@ -120,6 +122,9 @@ export default {
       );
       if (sendEmailSuccess) {
         console.log("Email sent to ", email);
+        this.setErrorMessage({
+          submitEmail: "",
+        });
         navigation.navigate("Verification", { email: email });
       } else {
         this.setErrorMessage({
@@ -152,6 +157,8 @@ export default {
       );
       if (verifySuccess) {
         console.log("Verify code successfully");
+        this.setErrorMessage({ verifyCode: "" });
+        navigation.navigate("NewPassword", { email: email });
       } else {
         const errorMessage = R.path([
           "data",
@@ -166,6 +173,37 @@ export default {
             verifyCode: "Something went wrong. Please try again later",
           });
         }
+      }
+    },
+    async changePassword({ email, password }) {
+      if (!email) {
+        this.setErrorMessage({
+          changePassword: "Something went wrong. Please try again later",
+        });
+        console.log("Failed to get email from navigation");
+      }
+      const response = await client.mutate({
+        mutation: CHANGE_PASSWORD,
+        variables: {
+          data: {
+            email,
+            password,
+          },
+        },
+      });
+      const changePasswordSuccess = R.path([
+        "data",
+        "changePassword",
+        "changePasswordSuccess",
+      ])(response);
+      if (changePasswordSuccess) {
+        console.log("Change password successfully");
+        this.setErrorMessage({ changePassword: "" });
+        await this.login({ email, password });
+      } else {
+        this.setErrorMessage({
+          changePassword: "Something went wrong. Please try again later",
+        });
       }
     },
   }),

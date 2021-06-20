@@ -13,12 +13,9 @@ import * as yup from "yup";
 import colors from "colors";
 import { TextInputForm, BackButton, SubmitFormButton } from "components";
 
-// const verificationCodeSchema = yup.object().shape({
-//   email: yup
-//     .string()
-//     .email("Please enter valid email")
-//     .required("Email Address is Required"),
-// });
+const verificationCodeSchema = yup.object().shape({
+  verificationCode: yup.string().required("Verification code is required"),
+});
 
 const Verification = ({
   sendVerificationCode,
@@ -39,7 +36,7 @@ const Verification = ({
           <View style={styles.container}>
             <View style={{ alignItems: "center" }}>
               <FormikForm
-                // validationSchema={verificationCodeSchema}
+                validationSchema={verificationCodeSchema}
                 initialValues={{ verificationCode: "" }}
                 onSubmit={async (data) => {
                   await verifyCode({
@@ -68,7 +65,7 @@ const Verification = ({
                   <Text style={{ color: colors.primary }}>Resend code</Text>
                 </TouchableOpacity>
                 <Text style={styles.errorText}>
-                  {auth.errorMessage.verifyCode}
+                  {auth.errorMessage?.verifyCode}
                 </Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Submit Verification Code" />

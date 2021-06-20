@@ -1,1 +1,7 @@
-export { LOGIN, REGISTER, SEND_VERIFICATION_CODE, VERIFY_CODE } from "./user";
+export {
+  LOGIN,
+  REGISTER,
+  SEND_VERIFICATION_CODE,
+  VERIFY_CODE,
+  CHANGE_PASSWORD,
+} from "./user";

@@ -43,7 +43,7 @@ const EmailSubmission = ({ sendVerificationCode, auth, navigation }) => {
                   keyboardType="email-address"
                 />
                 <Text style={styles.errorText}>
-                  {auth.errorMessage.submitEmail}
+                  {auth.errorMessage?.submitEmail}
                 </Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Submit Email" />

@@ -61,7 +61,7 @@ const Register = ({ auth, register, navigation }) => {
                   secureTextEntry
                 />
                 <Text style={styles.errorText}>
-                  {auth.errorMessage.register}
+                  {auth.errorMessage?.register}
                 </Text>
                 <View style={{ marginTop: 30 }}>
                   <SubmitFormButton title="Register" />

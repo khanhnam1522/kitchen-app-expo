@@ -47,6 +47,7 @@ const Routes = () => {
           component={Screen.EmailSubmission}
         />
         <Stack.Screen name="Verification" component={Screen.Verification} />
+        <Stack.Screen name="NewPassword" component={Screen.NewPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );

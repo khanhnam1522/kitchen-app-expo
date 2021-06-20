@@ -49,3 +49,15 @@ export const VERIFY_CODE = gql`
     }
   }
 `;
+
+export const CHANGE_PASSWORD = gql`
+  mutation changePassword($data: ChangePasswordInput!) {
+    changePassword(data: $data) {
+      errors {
+        field
+        message
+      }
+      changePasswordSuccess
+    }
+  }
+`;
