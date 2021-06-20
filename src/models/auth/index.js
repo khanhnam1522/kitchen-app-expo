@@ -54,7 +54,13 @@ export default {
         const errorMessage = R.path(["data", "login", "errors", "message"])(
           response
         );
-        this.setErrorMessage({ login: errorMessage });
+        if (errorMessage) {
+          this.setErrorMessage({ login: errorMessage });
+        } else {
+          this.setErrorMessage({
+            verifyCode: "Something went wrong. Please try again later",
+          });
+        }
       }
     },
     async logout() {
@@ -83,10 +89,24 @@ export default {
         const errorMessage = R.path(["data", "register", "errors", "message"])(
           response
         );
-        this.setErrorMessage({ register: errorMessage });
+        if (errorMessage) {
+          this.setErrorMessage({ register: errorMessage });
+        } else {
+          this.setErrorMessage({
+            verifyCode: "Something went wrong. Please try again later",
+          });
+        }
       }
     },
     async sendVerificationCode({ email }) {
+      if (!email) {
+        this.setErrorMessage({
+          submitEmail: "Something went wrong. Please try again later",
+        });
+        console.log(
+          "Failed to get email from navigation, check resend verification"
+        );
+      }
       const response = await client.mutate({
         mutation: SEND_VERIFICATION_CODE,
         variables: {
@@ -108,6 +128,12 @@ export default {
       }
     },
     async verifyCode({ verificationCode, email }) {
+      if (!email) {
+        this.setErrorMessage({
+          submitEmail: "Something went wrong. Please try again later",
+        });
+        console.log("Failed to get email from navigation");
+      }
       if (Number.isNaN(verificationCode)) {
         this.setErrorMessage({ verifyCode: "Invalid verification code" });
         return;
@@ -133,7 +159,13 @@ export default {
           "errors",
           "message",
         ])(response);
-        this.setErrorMessage({ verifyCode: errorMessage });
+        if (errorMessage) {
+          this.setErrorMessage({ verifyCode: errorMessage });
+        } else {
+          this.setErrorMessage({
+            verifyCode: "Something went wrong. Please try again later",
+          });
+        }
       }
     },
   }),
