@@ -51,13 +51,14 @@ export default {
       await deleteItem("accessToken");
       navigation.reset("Login");
     },
-    async register({ email, password }) {
+    async register({ email, password, username }) {
       const response = await client.mutate({
         mutation: REGISTER,
         variables: {
           data: {
             email,
             password,
+            username,
           },
         },
       });
