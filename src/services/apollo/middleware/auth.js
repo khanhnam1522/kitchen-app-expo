@@ -1,12 +1,14 @@
-import { getItem } from "secureStore";
-import { setContext } from "apollo-link-context";
+import { getItem } from 'secureStore';
+import { setContext } from 'apollo-link-context';
 
-export const authMiddleware = setContext(async (operation) => {
-  const accessToken = await getItem("accessToken");
-  const res = {
-    headers: {
-      authorization: "bearer " + (accessToken || null),
-    },
-  };
-  return res;
+const authMiddleware = setContext(async () => {
+	const accessToken = await getItem('accessToken');
+	const res = {
+		headers: {
+			authorization: `bearer ${accessToken || null}`,
+		},
+	};
+	return res;
 });
+
+export default authMiddleware;

@@ -1,5 +1,5 @@
-import createLoading from "@rematch/loading";
+import createLoading from '@rematch/loading';
 
 export default createLoading({
-  whitelist: ["auth/login", "auth/logout"],
+	whitelist: ['auth/login', 'auth/logout'],
 });

@@ -1,8 +1,8 @@
 // Pages
-export { default as Login } from "./Login";
-export { default as MainScreen } from "./MainScreen";
-export { default as Landing } from "./Landing";
-export { default as Register } from "./Register";
-export { default as EmailSubmission } from "./ForgotPassword/EmailSubmission";
-export { default as Verification } from "./ForgotPassword/Verification";
-export { default as NewPassword } from "./ForgotPassword/NewPassword";
+export { default as Login } from './Login';
+export { default as MainScreen } from './MainScreen';
+export { default as Landing } from './Landing';
+export { default as Register } from './Register';
+export { default as EmailSubmission } from './ForgotPassword/EmailSubmission';
+export { default as Verification } from './ForgotPassword/Verification';
+export { default as NewPassword } from './ForgotPassword/NewPassword';
