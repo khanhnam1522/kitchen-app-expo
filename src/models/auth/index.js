@@ -50,7 +50,7 @@ export default {
 			if (accessToken) {
 				this.setToken(accessToken);
 				await setItem('accessToken', accessToken);
-				navigation.reset('MainScreen');
+				navigation.reset('App');
 			} else {
 				const errorMessage = R.path(['data', 'login', 'errors', 'message'])(
 					response
@@ -86,7 +86,7 @@ export default {
 				this.setToken(accessToken);
 				await setItem('accessToken', accessToken);
 				this.setErrorMessage({ register: '' });
-				navigation.reset('MainScreen');
+				navigation.reset('App');
 			} else {
 				const errorMessage = R.path(['data', 'register', 'errors', 'message'])(
 					response
