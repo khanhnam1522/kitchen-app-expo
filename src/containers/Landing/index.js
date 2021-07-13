@@ -10,7 +10,7 @@ const Landing = () => {
 	const isToken = async () => {
 		const accessToken = await getItem('accessToken');
 		if (accessToken) {
-			navigation.reset('MainScreen');
+			navigation.reset('App');
 		} else {
 			navigation.reset('Login');
 		}
