@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Platform } from 'react-native';
 
 const DefaultText = (props) => {
 	const { children } = props;
@@ -11,7 +11,10 @@ const DefaultText = (props) => {
 };
 
 const styles = StyleSheet.create({
-	text: { fontSize: 16, fontFamily: 'Roboto' },
+	text: {
+		fontSize: 16,
+		fontFamily: Platform.OS === 'ios' ? 'Arial' : 'Roboto',
+	},
 });
 
 export default DefaultText;

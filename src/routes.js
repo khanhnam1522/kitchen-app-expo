@@ -4,6 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { navigationRef } from 'navigation';
+import Icon from 'icons';
+import colors from 'colors';
 import * as Screen from './containers';
 
 const fadeInTransition = () => ({
@@ -31,9 +33,33 @@ const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => (
 	<Tab.Navigator>
-		<Tab.Screen name="Home" component={Screen.Home} />
-		<Tab.Screen name="Settings" component={Screen.Settings} />
-		<Tab.Screen name="Notifications" component={Screen.Notifications} />
+		<Tab.Screen
+			name="Home"
+			component={Screen.Home}
+			options={{
+				tabBarLabel: 'Home',
+				tabBarIcon: () => <Icon color={colors.primary} size={25} type="home" />,
+			}}
+		/>
+		<Tab.Screen
+			name="Settings"
+			component={Screen.Settings}
+			options={{
+				tabBarLabel: 'Settings',
+				tabBarIcon: () => (
+					<Icon color={colors.primary} size={25} type="setting" />
+				),
+				tabBarAccessibilityLabel: '',
+			}}
+		/>
+		<Tab.Screen
+			name="Notifications"
+			component={Screen.Notifications}
+			options={{
+				tabBarLabel: 'Notifications',
+				tabBarIcon: () => <Icon color={colors.primary} size={25} type="noti" />,
+			}}
+		/>
 	</Tab.Navigator>
 );
 
