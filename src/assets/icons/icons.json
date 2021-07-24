@@ -1,4 +1,10 @@
 {
     "back-arrow": "ion-md-arrow-back",
-    "checkmark": "ion-md-checkmark-circle"
+    "checkmark": "ion-md-checkmark-circle",
+    "fridge": "mc-fridge-outline",
+    "home": "ad-home",
+    "setting": "ad-setting",
+    "noti": "ad-notification",
+    "snow": "fa-snowflake-o",
+    "shop": "en-shop"
 }

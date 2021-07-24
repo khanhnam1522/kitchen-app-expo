@@ -14,7 +14,8 @@
           "navigation": "./src/services/navigation",
           "secureStore": "./src/services/secureStore",
           "colors": "./src/styles/colors",
-          "icons": "./src/assets/icons"
+          "icons": "./src/assets/icons",
+          "customIcons": "./src/assets/icons/custom"
         }
       }
     ]
