@@ -7,3 +7,5 @@ export { default as SecondaryButton } from './Buttons/SecondaryButton';
 export { default as BackButton } from './Buttons/BackButton';
 export { default as Text } from './Text';
 export { default as Separator } from './Separator';
+export { default as Header } from './Header';
+export { default as Card } from './Card';

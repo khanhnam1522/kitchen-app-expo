@@ -15,7 +15,7 @@
           "secureStore": "./src/services/secureStore",
           "colors": "./src/styles/colors",
           "icons": "./src/assets/icons",
-          "fonts": "./src/assets/fonts",
+          "customIcons": "./src/assets/icons/custom"
         }
       }
     ]

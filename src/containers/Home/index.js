@@ -7,10 +7,8 @@ import {
 	Dimensions,
 	ScrollView,
 } from 'react-native';
-import { Text } from 'components';
-import Card from '../../components/Card/index';
-import Header from '../../components/Header';
-import * as Icon from '../../assets/icons/custom';
+import { Text, Card, Header } from 'components';
+import * as Icon from 'customIcons';
 
 const StorageScreen = () => (
 	<ScrollView style={styles.container}>

@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View, Dimensions } from 'react-native';
 import { Text } from 'components';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Lookup from '../../assets/icons/custom/lookup';
-import colors from '../../styles/colors';
+import { Lookup } from 'customIcons';
+import colors from 'colors';
 
 const Header = (props) => {
 	const { top } = useSafeAreaInsets();
